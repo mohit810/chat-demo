@@ -1,7 +1,7 @@
 {
-  "appName": "ss",
+  "appName": "chat-demo",
   "db": {
-    "name": "ss",
+    "name": "chat-demo",
     "host": "localhost",
     "port": 27017
   }
