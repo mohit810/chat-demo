@@ -1,0 +1,2 @@
+/node_modules
+# /config/localDevelopment.json # commenting this as we will need this for quick testing
