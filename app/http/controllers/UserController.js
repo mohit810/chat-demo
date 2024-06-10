@@ -1,8 +1,9 @@
 const User = require("@models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
-class UserController {
+class userController {
   constructor() {}
 
   async createUser(req, res) {
@@ -38,7 +39,7 @@ class UserController {
 
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
-      "your_jwt_private_key"
+      config.get("JWT_SECRET")
     );
     res.send({ token });
   }
@@ -66,4 +67,4 @@ class UserController {
   }
 }
 
-module.exports = UserController;
+module.exports = userController;

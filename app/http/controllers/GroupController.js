@@ -1,7 +1,7 @@
 const Group = require("@models/Group");
 const User = require("@models/User");
 
-class GroupController {
+class groupController {
   constructor() {}
 
   async createGroup(req, res) {
@@ -45,4 +45,4 @@ class GroupController {
   }
 }
 
-module.exports = GroupController;
+module.exports = groupController;

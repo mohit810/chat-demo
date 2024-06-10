@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "config": "^3.3.7",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
@@ -35,7 +36,7 @@
     "@controllers": "app/http/controllers",
     "@modules": "app/modules",
     "@models": "app/models",
-    "@middleware": "app/middleware",
+    "@middleware": "app/http/middleware",
     "@services": "app/services",
     "@routes": "app/http/routes",
     "@utils": "app/utils"

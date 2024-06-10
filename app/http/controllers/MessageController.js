@@ -1,6 +1,6 @@
 const Message = require("@models/Message");
 
-class MessageController {
+class messageController {
   constructor() {}
 
   async sendMessage(req, res) {
@@ -30,4 +30,4 @@ class MessageController {
   }
 }
 
-module.exports = MessageController;
+module.exports = messageController;
