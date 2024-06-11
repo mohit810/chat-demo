@@ -41,7 +41,7 @@ class userController {
       { _id: user._id, isAdmin: user.isAdmin },
       config.get("JWT_SECRET")
     );
-    res.send({ token });
+    res.send({ token, _id: user._id });
   }
 
   async logoutUser(req, res) {

@@ -34,7 +34,7 @@ class groupController {
     let group = await Group.findByIdAndDelete(groupId);
     if (!group) return res.status(404).send("Group not found.");
 
-    res.send("Group deleted successfully.");
+    res.send({ message: "Group deleted successfully." });
   }
 
   async searchGroups(req, res) {
