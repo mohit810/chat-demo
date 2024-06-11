@@ -38,7 +38,7 @@ describe("Group API Endpoints", () => {
     request(app)
       .put("/api/groups/addMember")
       .set("Authorization", `Bearer ${token}`)
-      .send({ groupId, userId: "6667e76d7f68bee860a6111b" }) // Use a valid userId from your DB
+      .send({ groupId, userId })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);

@@ -2,8 +2,7 @@ const Group = require("@models/Group");
 
 async function createGroupService(name) {
   let group = new Group({ name });
-  await group.save();
-  return group;
+  return await group.save();
 }
 
 async function groupFindById(groupId) {

@@ -52,7 +52,7 @@ describe("Message API Endpoints", () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body).to.have.property("likes").eql(1);
-        expect(res.body.likedBy).to.include(userId); // Ensure the user's ID is added to likedBy
+        expect(res.body.likedBy).to.include(userId);
         done();
       });
   });

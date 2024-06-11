@@ -9,12 +9,12 @@ async function findUserName(username) {
 }
 
 async function saveUser(newFlag, username, password, isAdmin, userId = "") {
-  var user;
+  let user;
   user = newFlag
     ? new User({ username, password, isAdmin })
-    : userFindById(userId);
-  await user.save;
-  return user;
+    : await userFindById(userId);
+
+  return await user.save();
 }
 
 module.exports = {

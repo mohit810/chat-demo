@@ -43,7 +43,7 @@ describe("User API Endpoints", () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.body).to.have.property("username").eql("adminEdited");
+        expect(res.body).to.have.property("username").eql("admin20");
         done();
       });
   });

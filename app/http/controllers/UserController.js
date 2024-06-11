@@ -13,19 +13,19 @@ class userController {
   async createUser(req, res) {
     const { username, password, isAdmin } = req.body;
 
-    let user = await findUserName(username);
+    var user = await findUserName(username);
     if (user) return res.status(400).send("User already exists on The App.");
     const salt = await bcrypt.genSalt(10);
     const _password = await bcrypt.hash(password, salt);
-    user = await saveUser(true, username, _password, isAdmin);
-
-    res.send(user);
+    var _user = await saveUser(true, username, _password, isAdmin);
+    res.send(_user);
   }
 
   async loginUser(req, res) {
     const { username, password } = req.body;
 
     let user = await findUserName(username);
+
     if (!user)
       return res
         .status(400)
@@ -33,9 +33,7 @@ class userController {
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword)
-      return res
-        .status(400)
-        .send("Invalid username or password.Please try again.");
+      return res.status(400).send("Invalid password.Please try again.");
 
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
