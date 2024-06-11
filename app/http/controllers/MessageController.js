@@ -1,4 +1,8 @@
-const Message = require("@models/Message");
+const {
+  createMessageService,
+  findMessageById,
+  saveMessage,
+} = require("@services/messageService");
 
 class messageController {
   constructor() {}
@@ -7,8 +11,7 @@ class messageController {
     const { groupId, content } = req.body;
     const userId = req.user._id;
 
-    let message = new Message({ groupId, userId, content });
-    await message.save();
+    let message = await createMessageService(groupId, userId, content);
 
     res.send(message);
   }
@@ -17,13 +20,13 @@ class messageController {
     const userId = req.user._id;
     const { messageId } = req.params;
 
-    let message = await Message.findById(messageId);
+    let message = await findMessageById(messageId);
     if (!message) return res.status(404).send("Message was not found.");
 
     if (!message.likedBy.includes(userId)) {
       message.likes += 1;
       message.likedBy.push(userId);
-      await message.save();
+      message = await saveMessage(message);
     }
 
     res.send(message);

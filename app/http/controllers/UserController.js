@@ -1,7 +1,11 @@
-const User = require("@models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const {
+  userFindById,
+  findUserName,
+  saveUser,
+} = require("@services/userService");
 
 class userController {
   constructor() {}
@@ -9,15 +13,11 @@ class userController {
   async createUser(req, res) {
     const { username, password, isAdmin } = req.body;
 
-    let user = await User.findOne({ username });
+    let user = await findUserName(username);
     if (user) return res.status(400).send("User already exists on The App.");
-
-    user = new User({ username, password, isAdmin });
-
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-
-    await user.save();
+    const _password = await bcrypt.hash(password, salt);
+    user = await saveUser(true, username, _password, isAdmin);
 
     res.send(user);
   }
@@ -25,7 +25,7 @@ class userController {
   async loginUser(req, res) {
     const { username, password } = req.body;
 
-    let user = await User.findOne({ username });
+    let user = await findUserName(username);
     if (!user)
       return res
         .status(400)
@@ -52,7 +52,7 @@ class userController {
   async editUser(req, res) {
     const { userId, username, password } = req.body;
 
-    let user = await User.findById(userId);
+    let user = await userFindById(userId);
     if (!user) return res.status(404).send("User was not found.");
 
     if (username) user.username = username;
@@ -61,7 +61,7 @@ class userController {
       user.password = await bcrypt.hash(password, salt);
     }
 
-    await user.save();
+    user = await saveUser(true, username, user.password, user.isAdmin);
 
     res.send(user);
   }
